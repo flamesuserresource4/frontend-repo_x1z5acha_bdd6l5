@@ -1,51 +1,63 @@
-import React from 'react';
-import { Moon, Menu } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, Moon } from 'lucide-react';
 
 export default function Navbar() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+
+  const navItems = [
+    { href: '#home', label: 'Home' },
+    { href: '#shades', label: 'Shades' },
+    { href: '#contact', label: 'Contact' },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/60 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 text-white">
-        <a href="#home" className="inline-flex items-center gap-2 font-semibold">
-          <Moon className="h-5 w-5 text-emerald-400" />
-          Lord of Shadows
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/60 backdrop-blur">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <a href="#home" className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded bg-gradient-to-br from-zinc-200 to-zinc-500" />
+          <span className="text-sm font-semibold tracking-wider text-zinc-100">Lord of Shadows</span>
         </a>
 
+        <div className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-sm text-zinc-300 transition-colors hover:text-zinc-100"
+            >
+              {item.label}
+            </a>
+          ))}
+          <button
+            aria-label="Toggle dark mode"
+            className="rounded-md border border-zinc-800/80 p-2 text-zinc-300 transition hover:bg-zinc-900 hover:text-zinc-100"
+          >
+            <Moon className="h-4 w-4" />
+          </button>
+        </div>
+
         <button
-          className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 p-2 text-white sm:hidden"
-          aria-label="Toggle navigation menu"
+          className="md:hidden"
+          aria-label="Open Menu"
           onClick={() => setOpen((v) => !v)}
         >
-          <Menu className="h-5 w-5" />
+          <Menu className="h-6 w-6 text-zinc-200" />
         </button>
-
-        <div className="hidden items-center gap-6 sm:flex">
-          <a href="#shades" className="text-sm text-white/80 transition hover:text-white">Shades</a>
-          <a href="#testimonials" className="text-sm text-white/80 transition hover:text-white">Whispers</a>
-          <a href="#contact" className="text-sm text-white/80 transition hover:text-white">Oath</a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-black shadow shadow-emerald-500/30 transition-transform duration-200 hover:scale-[1.03] hover:bg-emerald-400"
-          >
-            Bind the Shadows
-          </a>
-        </div>
       </nav>
 
       {open && (
-        <div className="border-t border-white/10 bg-black/80 px-6 py-3 text-white sm:hidden">
+        <div className="border-t border-zinc-800/80 bg-zinc-950/95 px-4 py-3 md:hidden">
           <div className="flex flex-col gap-3">
-            <a href="#shades" onClick={() => setOpen(false)} className="text-sm text-white/80 transition hover:text-white">Shades</a>
-            <a href="#testimonials" onClick={() => setOpen(false)} className="text-sm text-white/80 transition hover:text-white">Whispers</a>
-            <a href="#contact" onClick={() => setOpen(false)} className="text-sm text-white/80 transition hover:text-white">Oath</a>
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-emerald-500 px-4 py-2 text-sm font-medium text-black shadow shadow-emerald-500/30 transition-transform duration-200 hover:scale-[1.03] hover:bg-emerald-400"
-            >
-              Bind the Shadows
-            </a>
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="text-sm text-zinc-300 transition-colors hover:text-zinc-100"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       )}
