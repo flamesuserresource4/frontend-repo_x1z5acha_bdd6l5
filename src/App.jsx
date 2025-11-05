@@ -1,18 +1,20 @@
 import React from 'react';
-import Hero from './components/Hero';
-import Problem from './components/Problem';
-import Solution from './components/Solution';
+import Navbar from './components/Navbar';
+import ShadowHero from './components/ShadowHero';
+import Shades from './components/Shades';
+import Testimonials from './components/Testimonials';
+import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <Hero />
-      <Problem />
-      <Solution />
+    <div className="min-h-screen w-full bg-black text-white">
+      <Navbar />
+      <ShadowHero />
+      <Shades />
+      <Testimonials />
+      <ContactForm />
       <Footer />
     </div>
   );
 }
-
-export default App;
